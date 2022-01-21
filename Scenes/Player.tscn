@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://sprites/square.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 8, 8 )
 
 [node name="Player" type="RigidBody2D"]
 gravity_scale = 0.0
 angular_velocity = 5.0
 angular_damp = 0.5
+script = ExtResource( 2 )
 
 [node name="Square" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
