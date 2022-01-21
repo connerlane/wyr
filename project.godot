@@ -11,8 +11,15 @@ config_version=4
 [application]
 
 config/name="WYR"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=300
+window/size/height=300
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [physics]
 
