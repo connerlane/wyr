@@ -1,8 +1,8 @@
 extends RigidBody2D
 
 
-export var run_speed = 20
-export var max_run_speed = 130
+export var run_speed = 40
+export var max_run_speed = 260
 export var momentum_dampening = 0.94
 
 
@@ -27,7 +27,3 @@ func handle_input():
 		self.linear_velocity *= (max_run_speed/ self.linear_velocity.length())
 	self.linear_velocity *= momentum_dampening
 
-#func _input(event):
-#	if event is InputEventKey:
-#		if event.scancode == KEY_W:
-#		get_tree().quit()
