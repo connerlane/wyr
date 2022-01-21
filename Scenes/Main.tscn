@@ -17,4 +17,5 @@ __meta__ = {
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 139, 147 )
 linear_damp = 0.0
+angular_velocity = 0.0
 angular_damp = 0.1
