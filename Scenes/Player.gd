@@ -16,7 +16,7 @@ func _process(delta):
 	self.handle_input()
 	
 func handle_input():
-	var run_speed = 8
+	var run_speed = 15
 	if Input.is_key_pressed(KEY_D):
 		self.linear_velocity.x += run_speed
 	if Input.is_key_pressed(KEY_A):
@@ -25,6 +25,7 @@ func handle_input():
 		self.linear_velocity.y -= run_speed
 	if Input.is_key_pressed(KEY_S):
 		self.linear_velocity.y += run_speed
+	self.linear_velocity *= 0.9
 
 #func _input(event):
 #	if event is InputEventKey:
