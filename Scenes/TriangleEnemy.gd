@@ -20,5 +20,10 @@ func _process(delta):
 
 	var xunit = (xdif)/sqrt(pow(xdif,2)+pow(ydif,2))
 	var yunit = (ydif)/sqrt(pow(xdif,2)+pow(ydif,2))
+	xunit *= -1
+	yunit *= -1
 
-	print(xunit,yunit)
+	var speed = 100
+	self.linear_velocity.x = xunit*speed
+	self.linear_velocity.y = yunit*speed
+	
