@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Tokyoboe.mp3-bac8b1fe08cc64bc78eaad83a94bac2c.mp3str"
+
+[deps]
+
+source_file="res://audio/Tokyoboe.mp3"
+dest_files=[ "res://.import/Tokyoboe.mp3-bac8b1fe08cc64bc78eaad83a94bac2c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://Scenes/PowerBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Camera2D.gd" type="Script" id=3]
-[ext_resource path="res://audio/Pretty Silver Stitches.mp3" type="AudioStream" id=4]
+[ext_resource path="res://audio/Tokyoboe.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Scenes/EnemySpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/TopText.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=8]
-[ext_resource path="res://Scenes/TrianglePlayer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/SquarePlayer.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 259.5 )
@@ -92,6 +93,9 @@ script = ExtResource( 3 )
 [node name="HealthBar" parent="." instance=ExtResource( 7 )]
 position = Vector2( 7, 0 )
 
+[node name="PowerBar" parent="." instance=ExtResource( 1 )]
+position = Vector2( 698, 0 )
+
 [node name="TopText" parent="." instance=ExtResource( 6 )]
 text = "wow"
 
@@ -124,15 +128,16 @@ __meta__ = {
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
 
-[node name="TrianglePlayer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 216, 311 )
+[node name="SquarePlayer" parent="." instance=ExtResource( 9 )]
+position = Vector2( 401, 348 )
 
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -10.487
+autoplay = true
 
 [connection signal="player_changed" from="." to="Camera2D" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="HealthBar" method="_on_Main_player_changed"]
+[connection signal="player_changed" from="." to="PowerBar" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="TopText" method="_on_Main_player_changed"]
 [connection signal="health_empty" from="HealthBar" to="." method="_on_HealthBar_health_empty"]
 [connection signal="health_empty" from="HealthBar" to="TopText" method="_on_HealthBar_health_empty"]

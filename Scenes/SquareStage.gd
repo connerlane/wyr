@@ -14,3 +14,4 @@ func _ready():
 func _process(delta):
 	var boss = get_node(associated_boss)
 	print(boss.global_position.x)
+

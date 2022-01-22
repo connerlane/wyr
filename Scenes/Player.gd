@@ -11,6 +11,9 @@ signal health_hit
 onready var body = get_node("Avatar")
 
 var flash_timer = 9999
+var max_power_charges = 5
+var power_charges = 5
+
 
 func _ready():
 	pass # Replace with function body.

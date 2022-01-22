@@ -36,4 +36,7 @@ end_cap_mode = 2
 wait_time = 0.3
 one_shot = true
 
+[node name="PowerRechargeTimer" type="Timer" parent="." index="3"]
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="PowerRechargeTimer" to="." method="_on_PowerRechargeTimer_timeout"]

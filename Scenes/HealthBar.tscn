@@ -42,8 +42,6 @@ points = PoolVector2Array( 0, 0, 30, 0 )
 width = 5.0
 default_color = Color( 1, 1, 1, 1 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="LevelLabel2" type="Label" parent="."]
 modulate = Color( 1, 0, 0, 1 )
 margin_left = -276.0

@@ -7,9 +7,11 @@ export var dash_strength = 1600
 
 var dashing = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	self.max_power_charges = 3
+	self.power_charges = 3
 
 func handle_trail():
 	if !self.dashing:
@@ -26,7 +28,9 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.pressed:
+		if event.pressed and self.power_charges > 0:
+			$PowerRechargeTimer.start()
+			self.power_charges -= 1
 			$DashTimer.start()
 			self.dashing = true
 			var mouse_coords = get_viewport().get_mouse_position()
@@ -46,3 +50,9 @@ func _on_SquareAvatar_body_entered(body):
 			emit_signal("health_hit")
 			body.die()
 			self.flash_timer = 0
+
+
+func _on_PowerRechargeTimer_timeout():
+	self.power_charges += 1
+	if self.power_charges >= self.max_power_charges:
+		$PowerRechargeTimer.stop()
