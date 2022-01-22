@@ -22,7 +22,6 @@ func handle_trail():
 
 func _process(delta):
 	self.handle_trail()
-	print($Avatar.linear_velocity.length())
 
 
 func _input(event):
