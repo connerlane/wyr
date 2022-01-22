@@ -31,4 +31,7 @@ shape = SubResource( 2 )
 [node name="PowerRechargeTimer" type="Timer" parent="." index="1"]
 wait_time = 3.0
 
+[node name="PulseTimer" type="Timer" parent="." index="2"]
+one_shot = true
+
 [connection signal="timeout" from="PowerRechargeTimer" to="." method="_on_PowerRechargeTimer_timeout"]
