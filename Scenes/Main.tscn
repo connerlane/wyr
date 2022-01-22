@@ -1,6 +1,5 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scenes/SquarePlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://audio/Pretty Silver Stitches.mp3" type="AudioStream" id=4]
@@ -8,6 +7,7 @@
 [ext_resource path="res://Scenes/TopText.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Scenes/TrianglePlayer.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 259.5 )
@@ -124,16 +124,16 @@ __meta__ = {
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
 
-[node name="SquarePlayer" parent="." instance=ExtResource( 1 )]
-position = Vector2( 400, 350 )
+[node name="TrianglePlayer" parent="." instance=ExtResource( 9 )]
+position = Vector2( 216, 311 )
 
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -10.487
 
+[connection signal="player_changed" from="." to="Camera2D" method="_on_Main_player_changed"]
+[connection signal="player_changed" from="." to="HealthBar" method="_on_Main_player_changed"]
+[connection signal="player_changed" from="." to="TopText" method="_on_Main_player_changed"]
 [connection signal="health_empty" from="HealthBar" to="." method="_on_HealthBar_health_empty"]
 [connection signal="health_empty" from="HealthBar" to="TopText" method="_on_HealthBar_health_empty"]
 [connection signal="wave_change" from="EnemySpawner" to="." method="_on_EnemySpawner_wave_change"]
-[connection signal="health_hit" from="SquarePlayer" to="Camera2D" method="_on_Player_health_hit"]
-[connection signal="health_hit" from="SquarePlayer" to="HealthBar" method="_on_Player_health_hit"]
-[connection signal="health_hit" from="SquarePlayer" to="TopText" method="_on_SquarePlayer_health_hit"]

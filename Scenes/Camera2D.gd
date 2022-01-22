@@ -13,9 +13,11 @@ var pulse_speed = 0
 var anchor_x = 0
 var anchor_y = 0
 var screen_shake_strength = 0.0
+onready var player = get_node("/root/Main").get_player_ref()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player.connect("health_hit", self, "_on_Player_health_hit")
 	anchor_x = self.position.x
 	anchor_y = self.position.y
 
@@ -54,3 +56,9 @@ func _on_Player_health_hit():
 	self.screen_shake()
 	
 	
+
+
+func _on_Main_player_changed():
+	player.disconnect("health_hit", self, "_on_Player_health_hit")
+	player = get_node("/root/Main").get_player_ref()
+	player.connect("health_hit", self, "_on_Player_health_hit")

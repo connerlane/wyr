@@ -10,12 +10,8 @@ extends "res://Scenes/Player.gd"
 func _ready():
 	pass # Replace with function body.
 
-func handle_trail():
-	$Line2D.add_point($Avatar.position)
-	while $Line2D.points.size() > 30:
-		$Line2D.remove_point(0)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	self.handle_trail()
 	pass

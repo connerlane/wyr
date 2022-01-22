@@ -7,10 +7,12 @@ extends Label
 
 var to_display = ""
 var game_over = false
+onready var player = get_node("/root/Main").get_player_ref()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.text = ""
+	player.connect("health_hit", self, "_on_Player_health_hit")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,7 +31,7 @@ func insult():
 	$CharacterTimer.start()
 
 
-func _on_SquarePlayer_health_hit():
+func _on_Player_health_hit():
 	if game_over:
 		return
 	self.insult()
@@ -53,3 +55,8 @@ func _on_HealthBar_health_empty():
 	$CharacterTimer.start()
 	$CharacterTimer.wait_time = 0.3
 
+
+func _on_Main_player_changed():
+	player.disconnect("health_hit", self, "_on_Player_health_hit")
+	player = get_node("/root/Main").get_player_ref()
+	player.connect("health_hit", self, "_on_Player_health_hit")

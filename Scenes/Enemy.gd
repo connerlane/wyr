@@ -1,16 +1,16 @@
 extends RigidBody2D
-export(NodePath) var player_ref
 
 export var speed = 100
 
 func _ready():
-	player_ref = "/root/Main/SquarePlayer"
+#	player_ref = "/root/Main/SquarePlayer"
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	self.angular_velocity = 5
-	var player=get_node(player_ref)
+	var player= get_node("/root/Main").get_player_ref()
 	
 	var player_x = player.get_position().x
 	var player_y = player.get_position().y

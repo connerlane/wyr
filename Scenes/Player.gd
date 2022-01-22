@@ -3,7 +3,7 @@ extends Node2D
 
 export var run_speed = 40
 export var max_run_speed = 260
-export var momentum_dampening = 0.94
+export var momentum_dampening = 0.90
 export var num_flashes_hurt = 8
 
 signal health_hit
@@ -29,8 +29,8 @@ func handle_input():
 		body.linear_velocity.y -= run_speed
 	if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN):
 		body.linear_velocity.y += run_speed
-	if body.linear_velocity.length() > max_run_speed:
-		body.linear_velocity *= (max_run_speed/ body.linear_velocity.length())
+#	if body.linear_velocity.length() > max_run_speed:
+#		body.linear_velocity *= (max_run_speed/ body.linear_velocity.length())
 	body.linear_velocity *= momentum_dampening
 
 func get_position():

@@ -1,6 +1,9 @@
 extends Node2D
 
 
+
+var player = "TrianglePlayer"
+signal player_changed
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -9,6 +12,9 @@ extends Node2D
 func _ready():
 	pass
 
+
+func get_player_ref():
+	return get_node(self.player)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -24,8 +30,9 @@ func _on_HealthBar_health_empty():
 	
 func game_over():
 	$EnemySpawner.queue_free()
-	$SquarePlayer.queue_free()
+	self.get_player_ref().queue_free()
 
 
 func _on_EnemySpawner_wave_change(value):
 	$WavesLabel.text = "Waves: " + str(value)
+
