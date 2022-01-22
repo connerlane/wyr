@@ -9,6 +9,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	self.angular_velocity = 5
 	var player=get_node(player_ref)
 	
 	var player_x = player.get_position().x
@@ -35,7 +36,7 @@ func _process(delta):
 
 #	self.rotation_degrees = 0
 #	var rotation_speed = 180.0
-#	set_rotd(get_rot() + delta * rotation_speed)
+#	set_rotd( () + delta * rotation_speed)
 #	print(self.rotation_degrees)
 
 func die():

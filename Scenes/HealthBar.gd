@@ -5,7 +5,7 @@ signal health_empty
 # var a = 2
 # var b = "text"
 var bar_pixel_size = 300
-var health = 20.0
+var health = 5.0
 onready var max_health = self.health
 
 # Called when the node enters the scene tree for the first time.

@@ -17,5 +17,5 @@ func handle_trail():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-#	self.handle_trail()
+	self.handle_trail()
 	pass
