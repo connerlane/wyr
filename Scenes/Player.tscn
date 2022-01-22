@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://audio/Collision.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
 
 [node name="Player" type="Node2D"]
@@ -12,5 +13,8 @@ contacts_reported = 10
 contact_monitor = true
 angular_velocity = 4.0
 angular_damp = 0.1
+
+[node name="CollideSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
 
 [connection signal="body_entered" from="Avatar" to="." method="_on_SquareAvatar_body_entered"]
