@@ -53,7 +53,6 @@ func maybe_change_color(delta):
 
 func _on_SquareAvatar_body_entered(body):
 	if body.has_method("die"):
-		$CollideSound.play()
 		emit_signal("health_hit")
 		body.die()
 		self.flash_timer = 0

@@ -28,6 +28,8 @@ func _on_Player_health_hit():
 	health = max(0, health)
 	if health == 0:
 		emit_signal("health_empty")
+	else:
+		$CollisionSound.play()
 
 
 func _on_Main_player_changed():

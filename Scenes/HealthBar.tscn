@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/HealthBar.gd" type="Script" id=1]
 [ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://audio/Collision.wav" type="AudioStream" id=3]
 
 [node name="HealthBar" type="Node2D"]
 position = Vector2( 6, 0 )
@@ -55,3 +56,7 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CollisionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 7.0

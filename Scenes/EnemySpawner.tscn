@@ -8,7 +8,7 @@ script = ExtResource( 1 )
 triangle_enemy = ExtResource( 2 )
 
 [node name="WaveTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 2.0
 one_shot = true
 autostart = true
 

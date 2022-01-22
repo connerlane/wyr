@@ -137,6 +137,7 @@ stream = ExtResource( 4 )
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+volume_db = 5.0
 
 [connection signal="player_changed" from="." to="Camera2D" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="HealthBar" method="_on_Main_player_changed"]
