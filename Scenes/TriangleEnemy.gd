@@ -26,4 +26,9 @@ func _process(delta):
 	var speed = 100
 	self.linear_velocity.x = xunit*speed
 	self.linear_velocity.y = yunit*speed
-	
+
+#	self.rotation_degrees = 0
+#	var rotation_speed = 180.0
+#	set_rotd(get_rot() + delta * rotation_speed)
+#	print(self.rotation_degrees)
+
