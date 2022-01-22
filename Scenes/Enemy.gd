@@ -1,8 +1,10 @@
 extends RigidBody2D
 export(NodePath) var player_ref
-# Called when the node enters the scene tree for the first time.
+
+export var speed = 100
+
 func _ready():
-	pass # Replace with function body.
+	player_ref = "/root/Main/SquarePlayer"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,12 +25,18 @@ func _process(delta):
 	xunit *= -1
 	yunit *= -1
 
-	var speed = 100
-	self.linear_velocity.x = xunit*speed
-	self.linear_velocity.y = yunit*speed
+	var adjusted_speed = self.speed
+	var thresh_dist = 100
+	var extra_speed = 50
+	if (player.get_position() - self.global_position).length() < thresh_dist:
+		adjusted_speed += extra_speed
+	self.linear_velocity.x = xunit*adjusted_speed
+	self.linear_velocity.y = yunit*adjusted_speed
 
 #	self.rotation_degrees = 0
 #	var rotation_speed = 180.0
 #	set_rotd(get_rot() + delta * rotation_speed)
 #	print(self.rotation_degrees)
 
+func die():
+	self.queue_free()

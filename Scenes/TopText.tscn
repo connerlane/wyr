@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scenes/TopText.gd" type="Script" id=2]
+
+[node name="TopText" type="Label"]
+margin_left = -12.0
+margin_top = 13.0
+margin_right = 808.0
+margin_bottom = 78.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 1 )
+align = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharacterTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="HangTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CharacterTimer" to="." method="_on_CharacterTimer_timeout"]
+[connection signal="timeout" from="HangTimer" to="." method="_on_HangTimer_timeout"]

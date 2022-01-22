@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/SquarePlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Camera2D.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/TriangleEnemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/EmojiEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/Pretty Silver Stitches.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/EnemySpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/TopText.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 259.5 )
@@ -79,19 +82,58 @@ default_color = Color( 1, 1, 1, 1 )
 position = Vector2( 16, 246 )
 shape = SubResource( 4 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 142, 147 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 400, 349 )
+offset = Vector2( 0, -15 )
 rotating = true
 current = true
 script = ExtResource( 3 )
 
-[node name="HexagonEnemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 459, 301 )
-gravity_scale = 0.0
+[node name="HealthBar" parent="." instance=ExtResource( 7 )]
+position = Vector2( 7, 0 )
 
-[node name="TriangleEnemy" parent="." instance=ExtResource( 4 )]
-position = Vector2( 257, 477 )
-player_ref = NodePath("../Player")
+[node name="TopText" parent="." instance=ExtResource( 6 )]
+text = "wow"
+
+[node name="LevelLabel" type="Label" parent="."]
+modulate = Color( 0.643137, 1, 0.54902, 1 )
+margin_left = 103.0
+margin_top = 620.0
+margin_right = 487.0
+margin_bottom = 685.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "Level: 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WavesLabel" type="Label" parent="."]
+modulate = Color( 0.952941, 0.54902, 1, 1 )
+margin_left = 364.0
+margin_top = 620.0
+margin_right = 1040.0
+margin_bottom = 686.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 8 )
+text = "Wave: 3"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
+
+[node name="SquarePlayer" parent="." instance=ExtResource( 1 )]
+position = Vector2( 400, 350 )
+
+[node name="Bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.487
+
+[connection signal="health_empty" from="HealthBar" to="." method="_on_HealthBar_health_empty"]
+[connection signal="health_empty" from="HealthBar" to="TopText" method="_on_HealthBar_health_empty"]
+[connection signal="wave_change" from="EnemySpawner" to="." method="_on_EnemySpawner_wave_change"]
+[connection signal="health_hit" from="SquarePlayer" to="Camera2D" method="_on_Player_health_hit"]
+[connection signal="health_hit" from="SquarePlayer" to="HealthBar" method="_on_Player_health_hit"]
+[connection signal="health_hit" from="SquarePlayer" to="TopText" method="_on_SquarePlayer_health_hit"]

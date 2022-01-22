@@ -1,13 +1,16 @@
 extends Node2D
 
-export(PackedScene) var texas_avatar
 
 export var run_speed = 40
 export var max_run_speed = 260
 export var momentum_dampening = 0.94
+export var num_flashes_hurt = 8
 
+signal health_hit
 
-onready var body = get_node("SquareAvatar")
+onready var body = get_node("Avatar")
+
+var flash_timer = 9999
 
 func _ready():
 	pass # Replace with function body.
@@ -15,6 +18,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	self.handle_input()
+	self.maybe_change_color(delta)
 
 func handle_input():
 	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
@@ -31,17 +35,21 @@ func handle_input():
 
 func get_position():
 	return body.global_position
-
-func _on_TexasTimer_timeout():
-	body = texas_avatar.instance()
-	add_child(body)
-	body.position = $SquareAvatar.position
-	body.angular_velocity = $SquareAvatar.angular_velocity
 	
-	remove_child($SquareAvatar)
-	
+func maybe_change_color(delta):
+	if self.flash_timer < 2:
+		self.flash_timer += delta
+		var v = (cos(self.flash_timer * 12) * 0.5) + 0.5
+		var a = self.flash_timer / 2.0
+		$Avatar/Sprite.modulate.g = a + v
+		$Avatar/Sprite.modulate.b = a + v
+	else:
+		$Avatar/Sprite.modulate.g = 1
+		$Avatar/Sprite.modulate.b = 1
 
 
 func _on_SquareAvatar_body_entered(body):
 	if body.has_method("die"):
+		emit_signal("health_hit")
 		body.die()
+		self.flash_timer = 0
