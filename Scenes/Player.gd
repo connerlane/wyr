@@ -40,3 +40,8 @@ func _on_TexasTimer_timeout():
 	
 	remove_child($SquareAvatar)
 	
+
+
+func _on_SquareAvatar_body_entered(body):
+	if body.has_method("die"):
+		body.die()
