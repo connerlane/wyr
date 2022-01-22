@@ -29,7 +29,8 @@ func handle_input():
 		body.linear_velocity *= (max_run_speed/ body.linear_velocity.length())
 	body.linear_velocity *= momentum_dampening
 
-
+func get_position():
+	return body.global_position
 
 func _on_TexasTimer_timeout():
 	body = texas_avatar.instance()

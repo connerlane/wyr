@@ -80,9 +80,6 @@ shape = SubResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 142, 147 )
-linear_damp = 0.0
-angular_velocity = 5.0
-angular_damp = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 400, 349 )
