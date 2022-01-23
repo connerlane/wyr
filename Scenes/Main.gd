@@ -163,7 +163,7 @@ func apply_choice(choice):
 	elif choice == "camera_spin":
 		$Camera2D.spinning = true
 	elif choice == "nightcore":
-		Engine.time_scale = 1.5
+		Engine.time_scale = 1.7
 		$Bgm.pitch_scale = 1.25
 	else:
 		print("missing implementation for " + choice)
