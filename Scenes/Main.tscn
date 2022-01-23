@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/PowerBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
@@ -13,10 +13,11 @@
 [ext_resource path="res://Scenes/WYRFetcher.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/CirclePlayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/TrianglePlayer.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/ChoiceB.tscn" type="PackedScene" id=14]
+[ext_resource path="res://fonts/new_dynamicfontsmall.tres" type="DynamicFont" id=14]
 [ext_resource path="res://Scenes/Biden.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/ChoiceA.tscn" type="PackedScene" id=16]
 [ext_resource path="res://videos/Fundamental-theorem-of-calculus-_Part-1_-AP-Calculus-AB-Khan-Academy.ogv" type="VideoStream" id=17]
+[ext_resource path="res://Scenes/ChoiceB.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 259.5 )
@@ -181,6 +182,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="WYRs"]
+modulate = Color( 0.666667, 0.666667, 0.666667, 1 )
+margin_left = 376.0
+margin_top = 334.0
+margin_right = 482.0
+margin_bottom = 399.0
+custom_fonts/font = ExtResource( 14 )
+text = "or"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Cards" type="Control" parent="WYRs"]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -189,18 +202,29 @@ __meta__ = {
 }
 
 [node name="ChoiceA" parent="WYRs/Cards" instance=ExtResource( 16 )]
-margin_left = 72.0
-margin_right = 372.0
+margin_left = 46.0
+margin_top = 175.0
+margin_right = 346.0
+margin_bottom = 525.0
 
-[node name="ChoiceB" parent="WYRs/Cards" instance=ExtResource( 14 )]
-margin_left = 428.0
+[node name="ChoiceB" parent="WYRs/Cards" instance=ExtResource( 18 )]
+margin_left = 454.0
 margin_top = 174.0
-margin_right = 740.0
+margin_right = 766.0
 margin_bottom = 530.0
 
 [node name="ChoiceMisclickTimer" type="Timer" parent="WYRs"]
 wait_time = 1.2
 one_shot = true
+
+[node name="Label2" type="Label" parent="WYRs"]
+modulate = Color( 0.666667, 0.666667, 0.666667, 1 )
+margin_left = 194.0
+margin_top = 76.0
+margin_right = 1063.0
+margin_bottom = 141.0
+custom_fonts/font = ExtResource( 14 )
+text = "Would You Rather"
 
 [connection signal="game_start" from="." to="TopText" method="_on_Main_game_start"]
 [connection signal="level_change" from="." to="TopText" method="_on_Main_level_change"]

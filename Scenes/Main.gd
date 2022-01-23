@@ -10,6 +10,9 @@ signal game_start
 signal level_change(value)
 var choice_a_code = ""
 var choice_b_code = ""
+var cur_choiceA = []
+var cur_choiceB = []
+var gnb = ""
 var can_click_choice = false
 var level_count = 1 
 
@@ -63,6 +66,9 @@ func offer_choice():
 	var choices = $WYRFetcher.get_pair(self.level_count, self.player)
 	var choiceA = choices[0]
 	var choiceB = choices[1]
+	self.cur_choiceA = choiceA
+	self.cur_choiceB = choiceB
+	self.gnb = choices[2]
 	choice_a_code = choiceA[0]
 	choice_b_code = choiceB[0]
 	$WYRs/Cards/ChoiceA/Label.text = choiceA[1]
@@ -119,12 +125,14 @@ func _on_ChoiceA_button_down():
 	if !can_click_choice:
 		return
 	apply_choice(self.choice_a_code)
+	$WYRFetcher.put_back(self.cur_choiceB, self.gnb)
 	clear_choice_menu()
 
 func _on_ChoiceB_button_down():
 	if !can_click_choice:
 		return
 	apply_choice(self.choice_b_code)
+	$WYRFetcher.put_back(self.cur_choiceA, self.gnb)
 	clear_choice_menu()
 
 func _on_ChoiceMisclickTimer_timeout():

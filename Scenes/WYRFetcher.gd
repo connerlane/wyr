@@ -8,7 +8,7 @@ const GEN_BAD_MILD = [
 #	["double_enemies",
 #	"Double the enemies."],
 	["math",
-	"Learn math."],
+	"Learn math"],
 ]
 
 const GEN_BAD_MEDIUM = [ 
@@ -21,20 +21,20 @@ const GEN_BAD_SEVERE = [
 #	["enemies_shoot",
 #	"Enemies shoot bullets."],
 	["enemies_speed_up",
-	"Enemies are 50% faster."],
+	"Enemies are 50% faster"],
 	["camera_spin",
-	"The camera spins."],
+	"The camera spins"],
 ]
 
 const GEN_NEUTRAL_MILD = [
 	["tokyo_ghoul",
-	"Listen to terrible anime covers."],
+	"Boku no naka ni"],
 	["developer_commentary",
-	"Listen to Developer Commentary."],
+	"Listen to Developer Commentary"],
 	["texas",
-	"You are now Texas."],
+	"You are now Texas"],
 	["biden",
-	"Enemies are now Joe Biden."],
+	"Enemies are now Joe Biden"],
 ]
 
 const GEN_NEUTRAL_MEDIUM = []
@@ -43,7 +43,7 @@ const GEN_NEUTRAL_SEVERE = [
 const GEN_GOOD_MILD = []
 const GEN_GOOD_MEDIUM = [
 	["you_speed_up",
-	"You get 50% extra movement speed."],
+	"You get 50% extra movement speed"],
 ]
 const GEN_GOOD_SEVERE = []
 
@@ -137,4 +137,11 @@ func get_pair(level, char_selection):
 		choiceB = selected_list.pop_back()
 	
 	return [choiceA, choiceB, good_bad_neutral]
-	
+
+func put_back(choice, gnb):
+	if gnb == "g":
+		ALL_GOOD.append(choice)
+	elif gnb == "n":
+		ALL_NEUTRAL.append(choice)
+	else:
+		ALL_BAD.append(choice)
