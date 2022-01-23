@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/FINAL_TRACK_V2.mp3-09b667ee15ca68fe3b4c46eb9cdeb994.mp3str"
+
+[deps]
+
+source_file="res://audio/FINAL_TRACK_V2.mp3"
+dest_files=[ "res://.import/FINAL_TRACK_V2.mp3-09b667ee15ca68fe3b4c46eb9cdeb994.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

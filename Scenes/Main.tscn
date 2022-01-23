@@ -1,9 +1,9 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/PowerBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Camera2D.gd" type="Script" id=3]
-[ext_resource path="res://audio/TrialSoundTrack(1).mp3" type="AudioStream" id=4]
+[ext_resource path="res://Scenes/Camera2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://audio/FINAL_TRACK_V2.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Scenes/EnemySpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/TopText.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=7]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Scenes/ChoiceA.tscn" type="PackedScene" id=16]
 [ext_resource path="res://videos/Fundamental-theorem-of-calculus-_Part-1_-AP-Calculus-AB-Khan-Academy.ogv" type="VideoStream" id=17]
 [ext_resource path="res://Scenes/ChoiceB.tscn" type="PackedScene" id=18]
+[ext_resource path="res://sprites/third_person.png" type="Texture" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 259.5 )
@@ -31,21 +32,23 @@ extents = Vector2( 308.5, 22.5 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 21.5, 255.5 )
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 18, 372.25 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 477, 21 )
+
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 circle_player_scene = ExtResource( 12 )
 square_player_scene = ExtResource( 9 )
 triangle_player_scene = ExtResource( 13 )
 
-[node name="Background" type="ColorRect" parent="."]
-margin_left = -566.0
-margin_top = -388.0
-margin_right = 1434.0
-margin_bottom = 1612.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ThirdPerson" type="Sprite" parent="."]
+position = Vector2( -23, 666 )
+rotation = 0.0075741
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 19 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="."]
 margin_left = 101.0
@@ -105,12 +108,36 @@ default_color = Color( 1, 1, 1, 1 )
 position = Vector2( 16, 246 )
 shape = SubResource( 4 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 400, 349 )
-offset = Vector2( 0, -15 )
-rotating = true
-current = true
-script = ExtResource( 3 )
+[node name="OuterWalls" type="Node2D" parent="SquareStage"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SquareStage/OuterWalls"]
+position = Vector2( -8, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquareStage/OuterWalls/StaticBody2D"]
+position = Vector2( -10, 284 )
+shape = SubResource( 5 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="SquareStage/OuterWalls"]
+position = Vector2( 826, 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquareStage/OuterWalls/StaticBody2D2"]
+position = Vector2( -10, 284 )
+shape = SubResource( 5 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="SquareStage/OuterWalls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquareStage/OuterWalls/StaticBody2D3"]
+position = Vector2( 422, -95 )
+shape = SubResource( 6 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="SquareStage/OuterWalls"]
+position = Vector2( -21, 758 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquareStage/OuterWalls/StaticBody2D4"]
+position = Vector2( 422, -95 )
+shape = SubResource( 6 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 3 )]
 
 [node name="HealthBar" parent="." instance=ExtResource( 7 )]
 position = Vector2( 2, 3 )
@@ -173,10 +200,11 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="WYRs"]
-margin_left = -162.0
-margin_top = -146.0
-margin_right = 1022.0
-margin_bottom = 896.0
+margin_left = 1.0
+margin_top = -21.0
+margin_right = 801.0
+margin_bottom = 729.0
+rect_min_size = Vector2( 750, 0 )
 color = Color( 0, 0, 0, 0.964706 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -228,7 +256,6 @@ text = "Would You Rather"
 
 [connection signal="game_start" from="." to="TopText" method="_on_Main_game_start"]
 [connection signal="level_change" from="." to="TopText" method="_on_Main_level_change"]
-[connection signal="player_changed" from="." to="Camera2D" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="HealthBar" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="PowerBar" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="TopText" method="_on_Main_player_changed"]

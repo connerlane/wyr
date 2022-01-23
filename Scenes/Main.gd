@@ -163,8 +163,22 @@ func apply_choice(choice):
 	elif choice == "camera_spin":
 		$Camera2D.spinning = true
 	elif choice == "nightcore":
-		Engine.time_scale = 1.7
-		$Bgm.pitch_scale = 1.25
+		Engine.time_scale = 1.45
+		$Bgm.stream = load("res://audio/nightcore.mp3")
+		$Bgm.pitch_scale = 1.2
+		$Bgm.volume_db = -8
+		$Bgm.play()
+	elif choice == "leave_box":
+		$SquareStage/Line2D/static.collision_layer = 0
+		$SquareStage/Line2D/static.collision_mask = 0
+		$SquareStage/Line2D2/StaticBody2D.collision_layer = 0
+		$SquareStage/Line2D2/StaticBody2D.collision_mask = 0
+		$SquareStage/Line2D3/StaticBody2D.collision_layer = 0
+		$SquareStage/Line2D3/StaticBody2D.collision_mask = 0
+		$SquareStage/Line2D4/StaticBody2D.collision_layer = 0
+		$SquareStage/Line2D4/StaticBody2D.collision_mask = 0
+	elif choice == "third_person":
+		$Camera2D.third_person()
 	else:
 		print("missing implementation for " + choice)
 		

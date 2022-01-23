@@ -19,10 +19,11 @@ func _ready():
 func _on_Bullet_body_entered(body):
 	if body.has_method("die"):
 		body.die()
-		if !self.piercing:
-			self.queue_free()
+	if !body.has_method("is_bullet") && !body.has_method("handle_input") && !self.piercing:
+		self.queue_free()
 		
-
+func is_bullet():
+	return true
 
 func _on_Timer_timeout():
 	self.queue_free()

@@ -1,7 +1,7 @@
 extends Node2D
 
-export var good_thresh = 0.66
-export var neutral_thresh = 0.33
+export var good_thresh = 0.7
+export var neutral_thresh = 0.45
 
 # "Generic specificity. Bad (negative) effects. Mild severity.
 const GEN_BAD_MILD = [ 
@@ -12,8 +12,7 @@ const GEN_BAD_MILD = [
 ]
 
 const GEN_BAD_MEDIUM = [ 
-	["nightcore",
-	"Nightcore Mode"],
+	
 ]
 
 const GEN_BAD_SEVERE = [ 
@@ -23,6 +22,8 @@ const GEN_BAD_SEVERE = [
 	"Enemies are 50% faster"],
 	["camera_spin",
 	"The camera spins"],
+	["third_person",
+	"Third person mode"],
 ]
 
 const GEN_NEUTRAL_MILD = [
@@ -34,15 +35,21 @@ const GEN_NEUTRAL_MILD = [
 
 ]
 
-const GEN_NEUTRAL_MEDIUM = []
+const GEN_NEUTRAL_MEDIUM = [
+	
+]
 const GEN_NEUTRAL_SEVERE = [
+	["nightcore",
+	"Nightcore Mode"],
 ]
 const GEN_GOOD_MILD = []
 const GEN_GOOD_MEDIUM = [
 	["you_speed_up",
 	"You get 50% extra movement speed"],
-		["biden",
+	["biden",
 	"Enemies are now Joe Biden (they are 30% slower)"],
+	["leave_box",
+	"You can leave the box"],
 ]
 const GEN_GOOD_SEVERE = [
 	["texas",
@@ -138,8 +145,8 @@ func get_pair(level, char_selection):
 	else:
 		choiceB = selected_list.pop_back()
 	
-	return [GEN_BAD_MEDIUM[0], choiceB, good_bad_neutral]
-
+	return [choiceA, choiceB, good_bad_neutral]
+#GEN_BAD_SEVERE[2]
 func put_back(choice, gnb):
 	if gnb == "g":
 		ALL_GOOD.append(choice)
