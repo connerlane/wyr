@@ -27,7 +27,7 @@ func _input(event):
 			var diff = mouse_coords - $Avatar.global_position
 			diff /= diff.length()
 			var b = bullet.instance()
-			b.global_position = $Avatar.global_position
+			b.global_position = $Avatar.global_position + (diff * 25)
 			b.linear_velocity = diff * self.bullet_fire_speed
 			get_node("/root/Main").add_child(b)
 			$BulletSound.play()

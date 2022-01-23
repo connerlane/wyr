@@ -17,7 +17,6 @@ func _ready():
 
 
 func _on_Bullet_body_entered(body):
-	print("erm")
 	if body.has_method("die"):
 		body.die()
 		if !self.piercing:

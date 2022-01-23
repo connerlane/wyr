@@ -43,6 +43,7 @@ func _input(event):
 			$PowerRechargeTimer.start()
 			$PulseTimer.start()
 			self.power_charges -= 1
+			$PulseNoise.play()
 
 func _on_PowerRechargeTimer_timeout():
 	self.power_charges += 1
