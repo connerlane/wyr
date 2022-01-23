@@ -8,6 +8,7 @@ extends Label
 var to_display = ""
 var game_over = false
 onready var player = get_node("/root/Main").get_player_ref()
+var clicked = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +19,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-var normal_insults = ["yikes", "embarassing", ":x", "oof", "wow bad"]
+var normal_insults = ["yikes", "embarassing", ":/", "oof", "wow bad"]
 
 
 func choice(lst):
@@ -35,7 +36,10 @@ func insult():
 func _on_Player_health_hit():
 	if game_over:
 		return
-	self.insult()
+	if clicked:
+		self.insult()
+	else:
+		display_text("Try mouse click")
 
 func _on_CharacterTimer_timeout():
 	if self.text.length() < self.to_display.length():
@@ -79,3 +83,8 @@ func _on_Main_game_start():
 
 func _on_Main_level_change(value):
 	display_text("Level " + str(value))
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			self.clicked = true

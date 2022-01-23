@@ -75,7 +75,7 @@ func _on_WaveTimer_timeout():
 func raise_difficulty():
 	enemies_per_wave_start *= 1.2
 	default_waves += 0.3334
-	self.enemy_speed *= self.difficulty_ramp
+	self.enemy_speed *= 1.1
 
 func reset():
 	enemies_spawned = 0
