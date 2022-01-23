@@ -14,6 +14,9 @@ const NEUTRAL_WYRs = [
 	["tokyo_ghoul",
 	2.0,
 	"Music becomes shitty anime OPs."],
+	["developer_commentary",
+	2.0,
+	"Music becomes Developer Commentary."],
 ]
 
 const GOOD_WYRs = [
@@ -39,7 +42,7 @@ func _ready():
 
 
 func get_pair(level, char_selection):
-	pass
+	return [NEUTRAL_WYRs[0], NEUTRAL_WYRs[1]]
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

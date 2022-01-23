@@ -3,7 +3,6 @@
 [ext_resource path="res://Scenes/PowerBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Camera2D.gd" type="Script" id=3]
-[ext_resource path="res://audio/Tokyoboe.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Scenes/EnemySpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/TopText.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=7]
@@ -13,6 +12,7 @@
 [ext_resource path="res://Scenes/WYRFetcher.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/CirclePlayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/TrianglePlayer.tscn" type="PackedScene" id=13]
+[ext_resource path="res://fonts/new_dynamicfontsmall.tres" type="DynamicFont" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 259.5 )
@@ -136,15 +136,70 @@ __meta__ = {
 [node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
 
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
 volume_db = -10.0
-autoplay = true
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = 5.0
 
 [node name="WYRFetcher" parent="." instance=ExtResource( 11 )]
+
+[node name="WYRs" type="Control" parent="."]
+visible = false
+light_mask = 2
+margin_right = 817.0
+margin_bottom = 706.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="WYRs"]
+margin_left = -162.0
+margin_top = -146.0
+margin_right = 1022.0
+margin_bottom = 896.0
+color = Color( 0, 0, 0, 0.521569 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChoiceA" type="Button" parent="WYRs"]
+margin_left = 93.0
+margin_top = 176.0
+margin_right = 393.0
+margin_bottom = 526.0
+custom_fonts/font = ExtResource( 14 )
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WYRs/ChoiceA"]
+margin_right = 300.0
+margin_bottom = 350.0
+custom_fonts/font = ExtResource( 14 )
+text = "you have a choice that is long"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="ChoiceB" type="Button" parent="WYRs"]
+margin_left = 405.0
+margin_top = 178.0
+margin_right = 705.0
+margin_bottom = 528.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WYRs/ChoiceB"]
+margin_right = 300.0
+margin_bottom = 350.0
+custom_fonts/font = ExtResource( 14 )
+text = "you have another choice that is also long"
+align = 1
+valign = 1
+autowrap = true
 
 [connection signal="player_changed" from="." to="Camera2D" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="HealthBar" method="_on_Main_player_changed"]
@@ -153,3 +208,5 @@ volume_db = 5.0
 [connection signal="health_empty" from="HealthBar" to="." method="_on_HealthBar_health_empty"]
 [connection signal="health_empty" from="HealthBar" to="TopText" method="_on_HealthBar_health_empty"]
 [connection signal="wave_change" from="EnemySpawner" to="." method="_on_EnemySpawner_wave_change"]
+[connection signal="button_down" from="WYRs/ChoiceA" to="." method="_on_ChoiceA_button_down"]
+[connection signal="button_down" from="WYRs/ChoiceB" to="." method="_on_ChoiceB_button_down"]

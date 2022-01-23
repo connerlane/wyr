@@ -2,12 +2,12 @@ extends Node2D
 
 export(PackedScene) var enemy_scene
 signal wave_change(value)
-var waves = 4
+var waves = 3
 export var default_waves = 4
 export var enemies_per_wave_start = 2
 export var enemies_per_wave = 2
 export var enemy_increase_per_wave = 3
-export var difficulty_ramp = 1.25
+export var difficulty_ramp = 1.5
 
 var enemy_speed = 1
 
@@ -59,11 +59,10 @@ func _on_WaveTimer_timeout():
 	emit_signal("wave_change", floor(self.waves))
 	
 func raise_difficulty():
-	enemies_per_wave *= self.difficulty_ramp
-	enemies_per_wave_start *= 1.4
-	default_waves *= 1.1
+	enemies_per_wave_start *= 1.8
+	default_waves += 0.3334
 	self.enemy_speed *= self.difficulty_ramp
-	
+
 func reset():
 	enemies_per_wave = enemies_per_wave_start
 	self.waves = self.default_waves
