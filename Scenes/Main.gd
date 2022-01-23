@@ -6,9 +6,8 @@ export(PackedScene) var square_player_scene
 export(PackedScene) var triangle_player_scene
 var player = ""
 signal player_changed
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
+var level_count = 1 
 
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
@@ -36,7 +35,25 @@ func game_over():
 	self.get_player_ref().queue_free()
 
 func _on_EnemySpawner_wave_change(value):
-	$WavesLabel.text = "Waves: " + str(value)
+	if value > 0:
+		$WavesLabel.text = "Waves left: " + str(value)
+	else:
+		self.advance_level()
+		
+func advance_level():
+	self.level_count += 1 
+	$LevelLabel.text = "Level: " + str(self.level_count)
+
+	# 	check if that was last level
+	#		possibly spawn boss choice?
+	$EnemySpawner.raise_difficulty()
+	$EnemySpawner.reset()
+	# ramp difficulty
+	# offer a new choice
+	# 	pull a choice pair from WYR_generator
+	# apply that choice
+	# reset the enemy spawner?
+	pass
 
 func set_player():
 	if Global.char_selection == "circle":

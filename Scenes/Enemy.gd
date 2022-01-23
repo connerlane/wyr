@@ -1,10 +1,11 @@
 extends RigidBody2D
 
-export var speed = 100
+export var speed = 140
+export var random_spread = 40
 
 func _ready():
 #	player_ref = "/root/Main/SquarePlayer"
-	pass
+	self.speed += (randi() % random_spread) - (random_spread / 2)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

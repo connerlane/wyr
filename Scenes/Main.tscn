@@ -121,13 +121,13 @@ __meta__ = {
 
 [node name="WavesLabel" type="Label" parent="."]
 modulate = Color( 0.952941, 0.54902, 1, 1 )
-margin_left = 364.0
+margin_left = 363.0
 margin_top = 620.0
-margin_right = 1040.0
+margin_right = 1039.0
 margin_bottom = 686.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
-text = "Wave: 3"
+text = "Waves left: ?"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -137,6 +137,8 @@ __meta__ = {
 
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -10.0
+autoplay = true
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )

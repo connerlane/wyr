@@ -5,8 +5,9 @@
 [ext_resource path="res://audio/Pop3.mp3" type="AudioStream" id=3]
 
 [node name="EnemySpawner" type="Node2D"]
+position = Vector2( -5, 0 )
 script = ExtResource( 1 )
-triangle_enemy = ExtResource( 2 )
+enemy_scene = ExtResource( 2 )
 
 [node name="WaveTimer" type="Timer" parent="."]
 wait_time = 2.0

@@ -1,6 +1,6 @@
 extends Node2D
 
-export(PackedScene) var triangle_enemy
+export(PackedScene) var enemy_scene
 signal wave_change(value)
 export var waves = 4
 export var enemies_per_wave = 2
@@ -25,7 +25,7 @@ func begin_wave():
 	$SpawnTimer.start()
 
 func _on_SpawnTimer_timeout():
-	var t = triangle_enemy.instance()
+	var t = enemy_scene.instance()
 	var c = randi() % 4
 	if c == 0:
 		t.position.x = randi() % 800
@@ -41,9 +41,14 @@ func _on_SpawnTimer_timeout():
 		t.position.x = -20
 	add_child(t)
 
-
 func _on_WaveTimer_timeout():
 	$SpawnTimer.start()
 	self.waves -= 1
 	emit_signal("wave_change", self.waves)
 	self.enemies_per_wave += self.enemy_increase_per_wave
+	
+func raise_difficulty():
+	pass
+	
+func reset():
+	pass
