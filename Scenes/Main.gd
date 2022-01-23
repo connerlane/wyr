@@ -154,12 +154,17 @@ func apply_choice(choice):
 		self.get_player_ref().get_node("Avatar/Sprite").texture = load("res://sprites/Texas.png")
 		self.get_player_ref().get_node("Avatar/Sprite").scale.x = 1.5
 		self.get_player_ref().get_node("Avatar/Sprite").scale.y = 1.5
+		self.get_player_ref().get_node("PowerRechargeTimer").wait_time = 0.001
 	elif choice == "biden":
 		$EnemySpawner.biden()
+		$EnemySpawner.enemy_speed *= 0.7
 	elif choice == "math":
 		$VideoPlayer.play()
 	elif choice == "camera_spin":
 		$Camera2D.spinning = true
+	elif choice == "nightcore":
+		Engine.time_scale = 1.5
+		$Bgm.pitch_scale = 1.25
 	else:
 		print("missing implementation for " + choice)
 		

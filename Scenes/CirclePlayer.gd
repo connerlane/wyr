@@ -9,8 +9,8 @@ export var bullet_fire_speed = 400
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.max_power_charges = 15
-	self.power_charges = 15
+	self.max_power_charges = 10
+	self.power_charges = 10
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
