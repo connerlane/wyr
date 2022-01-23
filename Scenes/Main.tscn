@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/PowerBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
@@ -8,8 +8,11 @@
 [ext_resource path="res://Scenes/TopText.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=8]
-[ext_resource path="res://Scenes/TrianglePlayer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/SquarePlayer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://audio/Game_Over.wav" type="AudioStream" id=10]
+[ext_resource path="res://Scenes/WYRFetcher.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/CirclePlayer.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/TrianglePlayer.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 259.5 )
@@ -25,6 +28,9 @@ extents = Vector2( 21.5, 255.5 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
+circle_player_scene = ExtResource( 12 )
+square_player_scene = ExtResource( 9 )
+triangle_player_scene = ExtResource( 13 )
 
 [node name="Background" type="ColorRect" parent="."]
 margin_left = -100.0
@@ -129,7 +135,7 @@ __meta__ = {
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
 
-[node name="TrianglePlayer" parent="." instance=ExtResource( 9 )]
+[node name="TrianglePlayer" parent="." instance=ExtResource( 13 )]
 position = Vector2( 403, 343 )
 
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
@@ -138,6 +144,8 @@ stream = ExtResource( 4 )
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = 5.0
+
+[node name="WYRFetcher" parent="." instance=ExtResource( 11 )]
 
 [connection signal="player_changed" from="." to="Camera2D" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="HealthBar" method="_on_Main_player_changed"]

@@ -1,7 +1,9 @@
 extends Node2D
 
 
-
+export(PackedScene) var circle_player_scene
+export(PackedScene) var square_player_scene
+export(PackedScene) var triangle_player_scene
 var player = "TrianglePlayer"
 signal player_changed
 # Declare member variables here. Examples:
