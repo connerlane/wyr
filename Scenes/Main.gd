@@ -95,15 +95,15 @@ func _on_ChoiceA_button_down():
 	apply_choice(self.choice_a_code)
 	clear_choice_menu()
 
-
 func _on_ChoiceB_button_down():
 	apply_choice(self.choice_b_code)
 	clear_choice_menu()
 
 func apply_choice(choice):
-	if self.choice_a_code == "tokyo_ghoul":
+	if choice == "tokyo_ghoul":
 		$Bgm.stream = load("res://audio/Tokyoboe.mp3")
 		$Bgm.play()
-	elif self.choice_a_code == "developer_commentary":
+	elif choice == "developer_commentary":
 		$Bgm.stream = load("res://audio/Commentary.mp3")
+		$Bgm.volume_db = -2
 		$Bgm.play()
