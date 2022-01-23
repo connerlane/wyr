@@ -1,7 +1,32 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Intro.gd" type="Script" id=1]
 [ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://audio/PULSE.wav" type="AudioStream" id=5]
+[ext_resource path="res://sprites/triangle.png" type="Texture" id=6]
+[ext_resource path="res://audio/DashFixed.wav" type="AudioStream" id=7]
+[ext_resource path="res://sprites/Untitled_8.png" type="Texture" id=8]
+[ext_resource path="res://audio/Laser.wav" type="AudioStream" id=9]
+[ext_resource path="res://sprites/square.png" type="Texture" id=10]
+[ext_resource path="res://sprites/cannon.png" type="Texture" id=11]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0312
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 14.0357
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0.172727 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [node name="Intro" type="Control"]
 anchor_right = 1.0
@@ -23,11 +48,10 @@ __meta__ = {
 }
 
 [node name="LevelLabel" type="Label" parent="."]
-modulate = Color( 0.643137, 1, 0.54902, 1 )
-margin_left = 109.0
-margin_top = 73.0
-margin_right = 1355.0
-margin_bottom = 138.0
+margin_left = 75.0
+margin_top = 100.0
+margin_right = 1321.0
+margin_bottom = 165.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 2 )
 text = "CHOOSE YOUR CHARACTER"
@@ -39,3 +63,153 @@ __meta__ = {
 position = Vector2( 401, 355 )
 rotating = true
 current = true
+
+[node name="CirclePlayer" type="Node2D" parent="."]
+position = Vector2( 133, 406 )
+
+[node name="Avatar" type="RigidBody2D" parent="CirclePlayer"]
+collision_mask = 3
+mode = 2
+gravity_scale = 0.0
+contacts_reported = 10
+contact_monitor = true
+angular_velocity = 0.3
+angular_damp = 0.1
+
+[node name="Cannon" type="Sprite" parent="CirclePlayer/Avatar"]
+rotation = -6.28319
+scale = Vector2( 4, 4 )
+texture = ExtResource( 11 )
+offset = Vector2( 0, -19 )
+
+[node name="Sprite" type="Sprite" parent="CirclePlayer/Avatar"]
+position = Vector2( 0, -0.75 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CirclePlayer/Avatar"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="PowerRechargeTimer" type="Timer" parent="CirclePlayer"]
+wait_time = 0.5
+
+[node name="BulletSound" type="AudioStreamPlayer2D" parent="CirclePlayer"]
+stream = ExtResource( 9 )
+
+[node name="Button" type="Button" parent="CirclePlayer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -76.0
+margin_top = -79.0
+margin_right = 74.0
+margin_bottom = 71.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SquarePlayer" type="Node2D" parent="."]
+position = Vector2( 391, 401 )
+
+[node name="Avatar" type="RigidBody2D" parent="SquarePlayer"]
+collision_mask = 3
+gravity_scale = 0.0
+contacts_reported = 10
+contact_monitor = true
+angular_velocity = -1.5
+angular_damp = 0.1
+
+[node name="Sprite" type="Sprite" parent="SquarePlayer/Avatar"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquarePlayer/Avatar"]
+shape = SubResource( 4 )
+
+[node name="Pulse" type="Sprite" parent="SquarePlayer/Avatar"]
+visible = false
+texture = ExtResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="SquarePlayer/Avatar/Pulse"]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquarePlayer/Avatar/Pulse/Area2D"]
+shape = SubResource( 2 )
+
+[node name="PowerRechargeTimer" type="Timer" parent="SquarePlayer"]
+wait_time = 3.0
+
+[node name="PulseTimer" type="Timer" parent="SquarePlayer"]
+one_shot = true
+
+[node name="PulseNoise" type="AudioStreamPlayer2D" parent="SquarePlayer"]
+stream = ExtResource( 5 )
+
+[node name="Button" type="Button" parent="SquarePlayer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -78.0
+margin_top = -75.0
+margin_right = 72.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TrianglePlayer" type="Node2D" parent="."]
+position = Vector2( 629, 403 )
+
+[node name="Avatar" type="RigidBody2D" parent="TrianglePlayer"]
+collision_mask = 3
+gravity_scale = 0.0
+contacts_reported = 10
+contact_monitor = true
+angular_velocity = 1.0
+angular_damp = 0.1
+
+[node name="Sprite" type="Sprite" parent="TrianglePlayer/Avatar"]
+position = Vector2( 0, -4 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrianglePlayer/Avatar"]
+shape = SubResource( 5 )
+
+[node name="Line2D" type="Line2D" parent="TrianglePlayer"]
+width = 15.0
+width_curve = SubResource( 6 )
+default_color = Color( 0.4, 0.501961, 1, 1 )
+gradient = SubResource( 3 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="DashTimer" type="Timer" parent="TrianglePlayer"]
+wait_time = 0.38
+one_shot = true
+
+[node name="PowerRechargeTimer" type="Timer" parent="TrianglePlayer"]
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="TrianglePlayer"]
+stream = ExtResource( 7 )
+
+[node name="Button" type="Button" parent="TrianglePlayer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -78.0
+margin_top = -69.0
+margin_right = 72.0
+margin_bottom = 81.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="body_entered" from="CirclePlayer/Avatar" to="CirclePlayer" method="_on_SquareAvatar_body_entered"]
+[connection signal="timeout" from="CirclePlayer/PowerRechargeTimer" to="CirclePlayer" method="_on_PowerRechargeTimer_timeout"]
+[connection signal="button_down" from="CirclePlayer/Button" to="." method="_on_ButtonCircle_button_down"]
+[connection signal="body_entered" from="SquarePlayer/Avatar" to="SquarePlayer" method="_on_SquareAvatar_body_entered"]
+[connection signal="body_entered" from="SquarePlayer/Avatar/Pulse/Area2D" to="SquarePlayer" method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="SquarePlayer/PowerRechargeTimer" to="SquarePlayer" method="_on_PowerRechargeTimer_timeout"]
+[connection signal="button_down" from="SquarePlayer/Button" to="." method="_on_ButtonSquare_button_down"]
+[connection signal="body_entered" from="TrianglePlayer/Avatar" to="TrianglePlayer" method="_on_SquareAvatar_body_entered"]
+[connection signal="timeout" from="TrianglePlayer/DashTimer" to="TrianglePlayer" method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="TrianglePlayer/PowerRechargeTimer" to="TrianglePlayer" method="_on_PowerRechargeTimer_timeout"]
+[connection signal="button_down" from="TrianglePlayer/Button" to="." method="_on_Button_button_down"]

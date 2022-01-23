@@ -4,15 +4,15 @@ extends Node2D
 export(PackedScene) var circle_player_scene
 export(PackedScene) var square_player_scene
 export(PackedScene) var triangle_player_scene
-var player = "TrianglePlayer"
+var player = ""
 signal player_changed
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+func _enter_tree():
+	self.set_player()
 
 func get_player_ref():
 	return get_node(self.player)
@@ -38,3 +38,22 @@ func game_over():
 func _on_EnemySpawner_wave_change(value):
 	$WavesLabel.text = "Waves: " + str(value)
 
+func set_player():
+	if Global.char_selection == "circle":
+		var p = circle_player_scene.instance()
+		p.global_position.x = 400
+		p.global_position.y = 350
+		add_child(p)
+		self.player = "CirclePlayer"
+	elif Global.char_selection == "square":
+		var p = square_player_scene.instance()
+		p.global_position.x = 400
+		p.global_position.y = 350
+		add_child(p)
+		self.player = "SquarePlayer"
+	elif Global.char_selection == "triangle":
+		var p = triangle_player_scene.instance()
+		p.global_position.x = 400
+		p.global_position.y = 350
+		add_child(p)
+		self.player = "TrianglePlayer"
