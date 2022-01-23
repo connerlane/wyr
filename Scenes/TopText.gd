@@ -22,6 +22,7 @@ var normal_insults = ["yikes", "embarassing", ":x", "oof", "wow bad"]
 
 
 func choice(lst):
+	randomize()
 	return lst[randi() % lst.size()]
 	
 func insult():
@@ -55,8 +56,26 @@ func _on_HealthBar_health_empty():
 	$CharacterTimer.start()
 	$CharacterTimer.wait_time = 0.3
 
+func display_text(text):
+	self.text = ""
+	self.to_display = text
+	$HangTimer.stop()
+	$CharacterTimer.start()
 
 func _on_Main_player_changed():
 	player.disconnect("health_hit", self, "_on_Player_health_hit")
 	player = get_node("/root/Main").get_player_ref()
 	player.connect("health_hit", self, "_on_Player_health_hit")
+
+
+func _on_EnemySpawner_wave_change(value):
+	if value == 1:
+		display_text("Last Wave")
+
+
+func _on_Main_game_start():
+	display_text("Good Luck :)")
+
+
+func _on_Main_level_change(value):
+	display_text("Level " + str(value))

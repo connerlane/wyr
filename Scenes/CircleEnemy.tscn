@@ -9,7 +9,6 @@ radius = 14.0357
 
 [node name="CircleEnemy" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
-speed = 50
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )

@@ -2,7 +2,7 @@ extends Camera2D
 
 
 export var twist_mag = 1.7
-export var twist_speed = 1
+export var twist_speed = 0.7
 
 var clock = 0
 var pulse_clock = 0
@@ -38,7 +38,7 @@ func handle_pulse(delta):
 	self.pulse_speed *= 0.999
 
 func handle_screen_shake(delta):
-	if int(self.screen_shake_strength) > 0:
+	if int(self.screen_shake_strength) > 0.001:
 		self.position.x = self.anchor_x + ((randi() % int(2 *self.screen_shake_strength)) - self.screen_shake_strength)
 		self.position.y = self.anchor_y + ((randi() % int(2 *self.screen_shake_strength)) - self.screen_shake_strength)
 		self.screen_shake_strength *= 0.95

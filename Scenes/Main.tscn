@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/PowerBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Camera2D.gd" type="Script" id=3]
-[ext_resource path="res://audio/Romantic_Organ.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/TrialSoundTrack(1).mp3" type="AudioStream" id=4]
 [ext_resource path="res://Scenes/EnemySpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/TopText.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=7]
@@ -13,7 +13,10 @@
 [ext_resource path="res://Scenes/WYRFetcher.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/CirclePlayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/TrianglePlayer.tscn" type="PackedScene" id=13]
-[ext_resource path="res://fonts/new_dynamicfontsmall.tres" type="DynamicFont" id=14]
+[ext_resource path="res://Scenes/ChoiceB.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Biden.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/ChoiceA.tscn" type="PackedScene" id=16]
+[ext_resource path="res://videos/Fundamental-theorem-of-calculus-_Part-1_-AP-Calculus-AB-Khan-Academy.ogv" type="VideoStream" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 259.5 )
@@ -39,6 +42,16 @@ margin_top = -100.0
 margin_right = 900.0
 margin_bottom = 900.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+margin_left = 101.0
+margin_top = 101.0
+margin_right = 701.0
+margin_bottom = 601.0
+stream = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -99,10 +112,10 @@ current = true
 script = ExtResource( 3 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 7 )]
-position = Vector2( 7, 0 )
+position = Vector2( 2, 3 )
 
 [node name="PowerBar" parent="." instance=ExtResource( 1 )]
-position = Vector2( 698, 0 )
+position = Vector2( 703, 2 )
 
 [node name="TopText" parent="." instance=ExtResource( 6 )]
 text = "wow"
@@ -128,13 +141,14 @@ margin_right = 1039.0
 margin_bottom = 686.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 8 )
-text = "Waves left: ?"
+text = "Waves:  "
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
+biden_scene = ExtResource( 15 )
 
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -146,6 +160,7 @@ stream = ExtResource( 10 )
 volume_db = 5.0
 
 [node name="WYRFetcher" parent="." instance=ExtResource( 11 )]
+visible = false
 
 [node name="WYRs" type="Control" parent="."]
 visible = false
@@ -161,49 +176,34 @@ margin_left = -162.0
 margin_top = -146.0
 margin_right = 1022.0
 margin_bottom = 896.0
-color = Color( 0, 0, 0, 0.521569 )
+color = Color( 0, 0, 0, 0.964706 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChoiceA" type="Button" parent="WYRs"]
-margin_left = 93.0
-margin_top = 176.0
-margin_right = 393.0
-margin_bottom = 526.0
-custom_fonts/font = ExtResource( 14 )
-clip_text = true
+[node name="Cards" type="Control" parent="WYRs"]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="WYRs/ChoiceA"]
-margin_right = 300.0
-margin_bottom = 350.0
-custom_fonts/font = ExtResource( 14 )
-text = "you have a choice that is long"
-align = 1
-valign = 1
-autowrap = true
+[node name="ChoiceA" parent="WYRs/Cards" instance=ExtResource( 16 )]
+margin_left = 72.0
+margin_right = 372.0
 
-[node name="ChoiceB" type="Button" parent="WYRs"]
-margin_left = 405.0
-margin_top = 178.0
-margin_right = 705.0
-margin_bottom = 528.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ChoiceB" parent="WYRs/Cards" instance=ExtResource( 14 )]
+margin_left = 428.0
+margin_top = 174.0
+margin_right = 740.0
+margin_bottom = 530.0
 
-[node name="Label" type="Label" parent="WYRs/ChoiceB"]
-margin_right = 300.0
-margin_bottom = 350.0
-custom_fonts/font = ExtResource( 14 )
-text = "you have another choice that is also long"
-align = 1
-valign = 1
-autowrap = true
+[node name="ChoiceMisclickTimer" type="Timer" parent="WYRs"]
+wait_time = 1.2
+one_shot = true
 
+[connection signal="game_start" from="." to="TopText" method="_on_Main_game_start"]
+[connection signal="level_change" from="." to="TopText" method="_on_Main_level_change"]
 [connection signal="player_changed" from="." to="Camera2D" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="HealthBar" method="_on_Main_player_changed"]
 [connection signal="player_changed" from="." to="PowerBar" method="_on_Main_player_changed"]
@@ -211,5 +211,7 @@ autowrap = true
 [connection signal="health_empty" from="HealthBar" to="." method="_on_HealthBar_health_empty"]
 [connection signal="health_empty" from="HealthBar" to="TopText" method="_on_HealthBar_health_empty"]
 [connection signal="wave_change" from="EnemySpawner" to="." method="_on_EnemySpawner_wave_change"]
-[connection signal="button_down" from="WYRs/ChoiceA" to="." method="_on_ChoiceA_button_down"]
-[connection signal="button_down" from="WYRs/ChoiceB" to="." method="_on_ChoiceB_button_down"]
+[connection signal="wave_change" from="EnemySpawner" to="TopText" method="_on_EnemySpawner_wave_change"]
+[connection signal="button_down" from="WYRs/Cards/ChoiceA" to="." method="_on_ChoiceA_button_down"]
+[connection signal="button_down" from="WYRs/Cards/ChoiceB" to="." method="_on_ChoiceB_button_down"]
+[connection signal="timeout" from="WYRs/ChoiceMisclickTimer" to="." method="_on_ChoiceMisclickTimer_timeout"]

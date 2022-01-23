@@ -31,7 +31,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="PowerRechargeTimer" type="Timer" parent="." index="1"]
-wait_time = 0.5
+wait_time = 0.001
 
 [node name="BulletSound" type="AudioStreamPlayer2D" parent="." index="2"]
 stream = ExtResource( 6 )

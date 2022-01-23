@@ -2,7 +2,6 @@ extends Node2D
 
 
 export var run_speed = 30
-export var max_run_speed = 260
 export var momentum_dampening = 0.90
 export var num_flashes_hurt = 8
 

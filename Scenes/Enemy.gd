@@ -5,12 +5,13 @@ export var random_spread = 40
 
 func _ready():
 #	player_ref = "/root/Main/SquarePlayer"
+	randomize()
 	self.speed += (randi() % random_spread) - (random_spread / 2)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	self.angular_velocity = 5
+#	self.angular_velocity = 5
 	var player= get_node("/root/Main").get_player_ref()
 	
 	var player_x = player.get_position().x
