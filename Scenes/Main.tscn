@@ -8,7 +8,7 @@
 [ext_resource path="res://Scenes/TopText.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=8]
-[ext_resource path="res://Scenes/SquarePlayer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/CirclePlayer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://audio/Game_Over.wav" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -129,8 +129,8 @@ __meta__ = {
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
 
-[node name="SquarePlayer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 401, 348 )
+[node name="CirclePlayer" parent="." instance=ExtResource( 9 )]
+position = Vector2( 400, 349 )
 
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

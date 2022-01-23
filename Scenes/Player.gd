@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export var run_speed = 40
+export var run_speed = 30
 export var max_run_speed = 260
 export var momentum_dampening = 0.90
 export var num_flashes_hurt = 8
@@ -49,7 +49,6 @@ func maybe_change_color(delta):
 	else:
 		$Avatar/Sprite.modulate.g = 1
 		$Avatar/Sprite.modulate.b = 1
-
 
 func _on_SquareAvatar_body_entered(body):
 	if body.has_method("die"):

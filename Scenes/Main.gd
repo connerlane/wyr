@@ -2,7 +2,7 @@ extends Node2D
 
 
 
-var player = "SquarePlayer"
+var player = "CirclePlayer"
 signal player_changed
 # Declare member variables here. Examples:
 # var a = 2

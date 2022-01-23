@@ -33,7 +33,7 @@ func _input(event):
 			self.power_charges -= 1
 			$DashTimer.start()
 			self.dashing = true
-			var mouse_coords = get_viewport().get_mouse_position()
+			var mouse_coords = get_global_mouse_position()
 			var diff = mouse_coords - $Avatar.global_position
 			diff /= diff.length()
 			$Avatar.linear_velocity += diff * self.dash_strength
