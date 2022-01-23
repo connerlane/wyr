@@ -37,6 +37,7 @@ func _input(event):
 			var diff = mouse_coords - $Avatar.global_position
 			diff /= diff.length()
 			$Avatar.linear_velocity += diff * self.dash_strength
+			$DashSound.play()
 
 
 func _on_DashTimer_timeout():

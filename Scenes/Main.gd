@@ -2,7 +2,7 @@ extends Node2D
 
 
 
-var player = "SquarePlayer"
+var player = "TrianglePlayer"
 signal player_changed
 # Declare member variables here. Examples:
 # var a = 2
@@ -32,7 +32,6 @@ func game_over():
 	$HealthBar.queue_free()
 	$PowerBar.queue_free()
 	self.get_player_ref().queue_free()
-
 
 func _on_EnemySpawner_wave_change(value):
 	$WavesLabel.text = "Waves: " + str(value)
