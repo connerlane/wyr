@@ -40,4 +40,5 @@ func _process(delta):
 #	print(self.rotation_degrees)
 
 func die():
+	get_parent().get_node("DeathSound").play()
 	self.queue_free()

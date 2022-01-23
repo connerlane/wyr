@@ -18,7 +18,7 @@ func _process(delta):
 	
 	if self.get_children().size() >= enemies_per_wave:
 		$SpawnTimer.stop()
-	if self.get_children().size() <= 2 and $WaveTimer.is_stopped() and $SpawnTimer.is_stopped():
+	if self.get_children().size() <= 3 and $WaveTimer.is_stopped() and $SpawnTimer.is_stopped():
 		$WaveTimer.start()
 		
 func begin_wave():
@@ -40,7 +40,6 @@ func _on_SpawnTimer_timeout():
 		t.position.y = randi() % 700
 		t.position.x = -20
 	add_child(t)
-		
 
 
 func _on_WaveTimer_timeout():
