@@ -6,6 +6,7 @@ export var twist_speed = 0.7
 
 var clock = 0
 var pulse_clock = 0
+var spinning = false
 
 var state = "default"
 var pulse_mag = 0
@@ -13,6 +14,8 @@ var pulse_speed = 0
 var anchor_x = 0
 var anchor_y = 0
 var screen_shake_strength = 0.0
+var spinning_rotation = 0
+
 onready var player = get_node("/root/Main").get_player_ref()
 
 # Called when the node enters the scene tree for the first time.
@@ -25,7 +28,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	clock += delta
-	self.rotation_degrees = sin(clock * twist_speed) * twist_mag
+	if self.spinning:
+		self.spinning_rotation += 0.3
+	self.rotation_degrees = (sin(clock * twist_speed) * twist_mag) + spinning_rotation
 	self.handle_pulse(delta)
 	self.handle_screen_shake(delta)
 	

@@ -150,7 +150,8 @@ func apply_choice(choice):
 		$EnemySpawner.biden()
 	elif choice == "math":
 		$VideoPlayer.play()
-	
+	elif choice == "camera_spin":
+		$Camera2D.spinning = true
 	else:
 		print("missing implementation for " + choice)
 		

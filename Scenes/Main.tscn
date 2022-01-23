@@ -37,10 +37,10 @@ square_player_scene = ExtResource( 9 )
 triangle_player_scene = ExtResource( 13 )
 
 [node name="Background" type="ColorRect" parent="."]
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 900.0
-margin_bottom = 900.0
+margin_left = -566.0
+margin_top = -388.0
+margin_right = 1434.0
+margin_bottom = 1612.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -22,6 +22,8 @@ const GEN_BAD_SEVERE = [
 #	"Enemies shoot bullets."],
 	["enemies_speed_up",
 	"Enemies are 50% faster."],
+	["camera_spin",
+	"The camera spins."],
 ]
 
 const GEN_NEUTRAL_MILD = [
