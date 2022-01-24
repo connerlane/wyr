@@ -16,7 +16,7 @@ var gnb = ""
 var can_click_choice = false
 var level_count = 1 
 var gaining_health = false
-var boss_level_id = 4
+var boss_level_id = 7
 
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
