@@ -44,6 +44,12 @@ func _input(event):
 			$PulseTimer.start()
 			self.power_charges -= 1
 			$PulseNoise.play()
+	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
+		if self.power_charges > 0:
+			$PowerRechargeTimer.start()
+			$PulseTimer.start()
+			self.power_charges -= 1
+			$PulseNoise.play()
 
 func _on_PowerRechargeTimer_timeout():
 	self.power_charges += 1
@@ -55,9 +61,7 @@ func _on_Area2D_body_entered(body):
 	if body.has_method("die"):
 		if !$PulseTimer.is_stopped():
 			body.die()
-			print("ha")
 			if body.has_method("is_boss"):
-				print("ho")
 				for i in range(0,9):
 					body.die()
 

@@ -21,6 +21,7 @@ func _process(delta):
 #	var rotation_speed = 180.0
 #	set_rotd( () + delta * rotation_speed)
 #	print(self.rotation_degrees)
+
 func move_towards_player():
 	var player= get_node("/root/Main").get_player_ref()
 	

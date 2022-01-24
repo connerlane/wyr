@@ -13,5 +13,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var boss = get_node(associated_boss)
-	print(boss.global_position.x)
 

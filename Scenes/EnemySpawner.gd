@@ -25,7 +25,6 @@ func _ready():
 
 func biden():
 	biden = true
-	print("biden")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -94,7 +93,6 @@ func reset():
 	active = true
 
 func spawn_boss():
-	print("boss")
 	var b = boss_scene.instance()
 	boss_level = true
 	b.connect("boss_dead", self, "boss_dies")

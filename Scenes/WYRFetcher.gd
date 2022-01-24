@@ -156,7 +156,7 @@ func get_pair(level, char_selection):
 	else:
 		choiceB = selected_list.pop_back()
 	
-	return [choiceA, choiceB, good_bad_neutral]
+	return [GEN_NEUTRAL_MEDIUM[0], choiceB, good_bad_neutral]
 #GEN_BAD_SEVERE[2]
 func put_back(choice, gnb):
 	if gnb == "g":
