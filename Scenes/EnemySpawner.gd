@@ -1,8 +1,8 @@
 extends Node2D
 
 var enemy_scene = preload("res://Scenes/CircleEnemy.tscn")
-export(PackedScene) var biden_scene
 var boss_scene = preload("res://Scenes/Boss.tscn")
+var biden_scene = preload("res://Scenes/Biden.tscn")
 signal wave_change(value)
 var waves = 3
 export var default_waves = 3

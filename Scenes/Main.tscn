@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/PowerBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://Scenes/CirclePlayer.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/TrianglePlayer.tscn" type="PackedScene" id=13]
 [ext_resource path="res://fonts/new_dynamicfontsmall.tres" type="DynamicFont" id=14]
-[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/ChoiceA.tscn" type="PackedScene" id=16]
 [ext_resource path="res://videos/KhanA.webm" type="VideoStream" id=17]
 [ext_resource path="res://Scenes/ChoiceB.tscn" type="PackedScene" id=18]
@@ -176,7 +175,6 @@ __meta__ = {
 }
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
-biden_scene = ExtResource( 15 )
 
 [node name="Bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
