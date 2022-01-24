@@ -7,7 +7,7 @@ var attacks = ["dash", "shoot", "pulse"]
 var attack_counter = 0
 var atk = ""
 export var pulse_magnitude = 12
-var health = 50.0
+var health = 100.0
 signal boss_dead
 
 func _ready():
@@ -29,7 +29,7 @@ func _process(delta):
 		self.speed = 50
 	else:
 		self.speed = 280
-	$Node2D/Health.rect_scale.x = self.health / 50.0
+	$Node2D/Health.rect_scale.x = self.health / 100.0
 		
 	
 func handle_pulse():
