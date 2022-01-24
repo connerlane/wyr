@@ -46,3 +46,6 @@ func _on_PowerRechargeTimer_timeout():
 	self.power_charges += 1
 	if self.power_charges >= self.max_power_charges:
 		$PowerRechargeTimer.stop()
+		
+func is_player():
+	return true

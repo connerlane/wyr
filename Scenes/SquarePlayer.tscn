@@ -25,8 +25,8 @@ shape = SubResource( 4 )
 texture = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="Avatar/Pulse" index="0"]
-collision_layer = 15
-collision_mask = 15
+collision_layer = 527
+collision_mask = 527
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Avatar/Pulse/Area2D" index="0"]
 shape = SubResource( 2 )

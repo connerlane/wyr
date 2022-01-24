@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/ChoiceB.gd" type="Script" id=3]
 
 [node name="ChoiceB" type="Button"]
-self_modulate = Color( 0.960784, 0.588235, 0.054902, 1 )
+self_modulate = Color( 0, 1, 0, 1 )
 margin_left = 445.0
 margin_top = 178.0
 margin_right = 757.0
@@ -24,7 +24,7 @@ margin_top = 3.0
 margin_right = 296.0
 margin_bottom = 353.0
 custom_fonts/font = ExtResource( 1 )
-text = "you have another choice that is also long"
+text = "Endless Mode"
 align = 1
 valign = 1
 autowrap = true

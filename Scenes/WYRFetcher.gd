@@ -1,14 +1,13 @@
 extends Node2D
 
-export var good_thresh = 0.7
+export var good_thresh = 0.65
 export var neutral_thresh = 0.45
 
 # "Generic specificity. Bad (negative) effects. Mild severity.
 const GEN_BAD_MILD = [ 
 #	["double_enemies",
 #	"Double the enemies."],
-	["math",
-	"Learn math"],
+	
 ]
 
 const GEN_BAD_MEDIUM = [ 
@@ -20,6 +19,8 @@ const GEN_BAD_SEVERE = [
 #	"Enemies shoot bullets."],
 	["enemies_speed_up",
 	"Enemies are 50% faster"],
+	["more_enemies",
+	"2x more enemies"],
 	["camera_spin",
 	"The camera spins"],
 	["third_person",
@@ -31,12 +32,11 @@ const GEN_NEUTRAL_MILD = [
 	"Boku no naka ni"],
 	["developer_commentary",
 	"Listen to Developer Commentary"],
-	
-
 ]
 
 const GEN_NEUTRAL_MEDIUM = [
-	
+	["math",
+	"Learn math"],
 ]
 const GEN_NEUTRAL_SEVERE = [
 	["nightcore",
@@ -45,7 +45,11 @@ const GEN_NEUTRAL_SEVERE = [
 const GEN_GOOD_MILD = []
 const GEN_GOOD_MEDIUM = [
 	["you_speed_up",
-	"You get 50% extra movement speed"],
+	"2x movement speed"],
+	["faster_recharge",
+	"2x ammo recharge rate"],
+	["faster_recharge",
+	"2x ammo recharge rate"],
 	["biden",
 	"Enemies are now Joe Biden (they are 30% slower)"],
 	["leave_box",
@@ -53,7 +57,14 @@ const GEN_GOOD_MEDIUM = [
 ]
 const GEN_GOOD_SEVERE = [
 	["texas",
-	"You are now Texas (ultd. ammo)"],
+	"You are now Texas (triple ammo)"],
+	["gain_health",
+	"Gain 1 health after every level"],
+	["less_waves",
+	"1 less wave on every level"],
+	["more_health",
+	"You take 50% less damage"],
+	
 ]
 
 
@@ -137,11 +148,11 @@ func get_pair(level, char_selection):
 	var choiceB = []
 	selected_list.shuffle()
 	if selected_list.size() == 0:
-		choiceA = ["test", "<Test>"]
+		choiceA = ["test", "Nothing happens"]
 	else:
 		choiceA = selected_list.pop_back()
 	if selected_list.size() == 0:
-		choiceB = ["test", "<Test>"]
+		choiceB = ["test", "Nothing happens"]
 	else:
 		choiceB = selected_list.pop_back()
 	

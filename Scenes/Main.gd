@@ -15,6 +15,8 @@ var cur_choiceB = []
 var gnb = ""
 var can_click_choice = false
 var level_count = 1 
+var gaining_health = false
+var boss_level_id = 4
 
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
@@ -42,16 +44,37 @@ func game_over():
 	$EnemySpawner.queue_free()
 	$HealthBar.queue_free()
 	$PowerBar.queue_free()
+	if get_node("Boss"):
+		get_node("Boss").queue_free()
 	self.get_player_ref().queue_free()
+	
+func win():
+	$EnemySpawner.queue_free()
+	$HealthBar.queue_free()
+	$PowerBar.queue_free()
+	if get_node("Boss"):
+		get_node("Boss").queue_free()
+	self.get_player_ref().queue_free()
+	$TopText.win()
 
 func _on_EnemySpawner_wave_change(value):
+	if str(value) == "???":
+		$WavesLabel.text = "Waves: ???"
+		return
 	if value > 0:
 		$WavesLabel.text = "Waves: " + str(value - 1)
 	else:
 		self.advance_level()
 		
 func advance_level():
+	if self.gaining_health:
+		$HealthBar.health += 1
+		$HealthBar.health = min($HealthBar.health, $HealthBar.max_health)
 	self.level_count += 1 
+	if self.level_count > boss_level_id:
+		win()
+		return
+		
 	$LevelLabel.text = "Level: " + str(self.level_count)
 	# 	check if that was last level
 	#		possibly spawn boss choice?
@@ -120,6 +143,8 @@ func clear_choice_menu():
 	$EnemySpawner.reset()
 	emit_signal("level_change", self.level_count)
 	can_click_choice = false
+	if self.level_count == boss_level_id:
+		$EnemySpawner.spawn_boss()
 	
 func _on_ChoiceA_button_down():
 	if !can_click_choice:
@@ -147,14 +172,15 @@ func apply_choice(choice):
 		$Bgm.volume_db = -2
 		$Bgm.play()
 	elif choice == "you_speed_up":
-		self.get_player_ref().run_speed *= 1.5
+		self.get_player_ref().run_speed *= 2
 	elif choice == "enemies_speed_up":
 		$EnemySpawner.enemy_speed *= 1.5
 	elif choice == "texas":
 		self.get_player_ref().get_node("Avatar/Sprite").texture = load("res://sprites/Texas.png")
 		self.get_player_ref().get_node("Avatar/Sprite").scale.x = 1.5
 		self.get_player_ref().get_node("Avatar/Sprite").scale.y = 1.5
-		self.get_player_ref().get_node("PowerRechargeTimer").wait_time = 0.001
+		self.get_player_ref().max_power_charges *= 3
+		self.get_player_ref().power_charges *= 3
 	elif choice == "biden":
 		$EnemySpawner.biden()
 		$EnemySpawner.enemy_speed *= 0.7
@@ -166,7 +192,7 @@ func apply_choice(choice):
 		Engine.time_scale = 1.45
 		$Bgm.stream = load("res://audio/nightcore.mp3")
 		$Bgm.pitch_scale = 1.2
-		$Bgm.volume_db = -8
+		$Bgm.volume_db = -12
 		$Bgm.play()
 	elif choice == "leave_box":
 		$SquareStage/Line2D/static.collision_layer = 0
@@ -179,6 +205,17 @@ func apply_choice(choice):
 		$SquareStage/Line2D4/StaticBody2D.collision_mask = 0
 	elif choice == "third_person":
 		$Camera2D.third_person()
+	elif choice == "faster_recharge":
+		self.get_player_ref().get_node("PowerRechargeTimer").wait_time *= 0.5
+	elif choice == "more_enemies":
+		$EnemySpawner.enemies_per_wave_start *= 2
+	elif choice == "gain_health":
+		self.gaining_health = true
+	elif choice == "less_waves":
+		$EnemySpawner.default_waves -= 1
+	elif choice == "more_health":
+		$HealthBar.max_health += 5
+		$HealthBar.health += 5
 	else:
 		print("missing implementation for " + choice)
 		

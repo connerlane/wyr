@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://sprites/triumph.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Boss.gd" type="Script" id=3]
+[ext_resource path="res://sprites/open_eyes.png" type="Texture" id=4]
+[ext_resource path="res://sprites/laughing_crying.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Lazer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/pulse_orb.png" type="Texture" id=7]
+[ext_resource path="res://sprites/shy.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "joy",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "shy",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "triumph",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "open_eyes",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 61.0737
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 16.0
+
+[node name="Boss" instance=ExtResource( 2 )]
+collision_layer = 512
+collision_mask = 512
+mode = 2
+mass = 65535.0
+script = ExtResource( 3 )
+lazer_scene = ExtResource( 6 )
+
+[node name="BetweenAttacksTimer" type="Timer" parent="." index="0"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AttackChargeTimer" type="Timer" parent="." index="1"]
+wait_time = 2.0
+one_shot = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="2"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+animation = "joy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2( 0, -1 )
+shape = SubResource( 1 )
+
+[node name="LeftEye" type="Node2D" parent="." index="4"]
+position = Vector2( -21, -2 )
+
+[node name="RightEye" type="Node2D" parent="." index="5"]
+position = Vector2( 23, -2 )
+
+[node name="Pulse" type="Sprite" parent="." index="6"]
+texture = ExtResource( 7 )
+
+[node name="Area2D" type="Area2D" parent="Pulse" index="0"]
+collision_layer = 783
+collision_mask = 783
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pulse/Area2D" index="0"]
+shape = SubResource( 3 )
+
+[node name="PulseTimer" type="Timer" parent="." index="7"]
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="." index="8"]
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="." index="9"]
+position = Vector2( 0, 3 )
+
+[node name="Health" type="ColorRect" parent="Node2D" index="0"]
+margin_left = -49.0
+margin_top = 64.0
+margin_right = 48.0
+margin_bottom = 74.0
+rect_scale = Vector2( 0.624, 1 )
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Node2D" index="1"]
+margin_left = -51.0
+margin_top = 63.0
+margin_right = 49.0
+margin_bottom = 65.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D" index="2"]
+margin_left = -51.0
+margin_top = 73.0
+margin_right = 49.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Node2D" index="3"]
+margin_left = -51.0
+margin_top = 63.0
+margin_right = -49.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Node2D" index="4"]
+margin_left = 48.0
+margin_top = 63.0
+margin_right = 50.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="timeout" from="BetweenAttacksTimer" to="." method="_on_BetweenAttacksTimer_timeout"]
+[connection signal="timeout" from="AttackChargeTimer" to="." method="_on_AttackChargeTimer_timeout"]
+[connection signal="body_entered" from="Pulse/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]

@@ -2,6 +2,7 @@ extends RigidBody2D
 
 export var speed = 140
 export var random_spread = 40
+export var is_boss = false
 
 func _ready():
 #	player_ref = "/root/Main/SquarePlayer"
@@ -11,7 +12,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if is_boss:
+		return
 #	self.angular_velocity = 5
+	self.move_towards_player()
+
+#	self.rotation_degrees = 0
+#	var rotation_speed = 180.0
+#	set_rotd( () + delta * rotation_speed)
+#	print(self.rotation_degrees)
+func move_towards_player():
 	var player= get_node("/root/Main").get_player_ref()
 	
 	var player_x = player.get_position().x
@@ -35,12 +45,6 @@ func _process(delta):
 		adjusted_speed += extra_speed
 	self.linear_velocity.x = xunit*adjusted_speed
 	self.linear_velocity.y = yunit*adjusted_speed
-
-#	self.rotation_degrees = 0
-#	var rotation_speed = 180.0
-#	set_rotd( () + delta * rotation_speed)
-#	print(self.rotation_degrees)
-
 func die():
 	get_parent().get_node("DeathSound").play()
 	self.queue_free()

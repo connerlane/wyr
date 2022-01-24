@@ -55,3 +55,11 @@ func _on_Area2D_body_entered(body):
 	if body.has_method("die"):
 		if !$PulseTimer.is_stopped():
 			body.die()
+			print("ha")
+			if body.has_method("is_boss"):
+				print("ho")
+				for i in range(0,9):
+					body.die()
+
+func is_player():
+	return true

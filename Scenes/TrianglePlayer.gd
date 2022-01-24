@@ -57,3 +57,18 @@ func _on_PowerRechargeTimer_timeout():
 	self.power_charges += 1
 	if self.power_charges >= self.max_power_charges:
 		$PowerRechargeTimer.stop()
+
+func is_player():
+	return true
+
+
+func _on_BossArea_body_entered(body):
+	if body.has_method("die"):
+		if !$DashTimer.is_stopped():
+			body.die()
+			if body.has_method("is_boss"):
+				for i in range(0,3):
+					body.die()
+		else:
+			self.get_hit()
+			

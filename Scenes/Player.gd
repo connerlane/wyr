@@ -54,3 +54,8 @@ func _on_SquareAvatar_body_entered(body):
 		emit_signal("health_hit")
 		body.die()
 		self.flash_timer = 0
+	
+func get_hit():
+	emit_signal("health_hit")
+	self.flash_timer = 0
+	

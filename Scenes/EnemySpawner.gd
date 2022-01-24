@@ -1,13 +1,14 @@
 extends Node2D
 
-export(PackedScene) var enemy_scene
+var enemy_scene = preload("res://Scenes/CircleEnemy.tscn")
 export(PackedScene) var biden_scene
+var boss_scene = preload("res://Scenes/Boss.tscn")
 signal wave_change(value)
 var waves = 3
 export var default_waves = 3
 export var enemies_per_wave_start = 3
-export var enemies_per_wave = 2
-export var enemy_increase_per_wave = 1.2
+export var enemies_per_wave = 3
+export var enemy_increase_per_wave = 1.4
 export var difficulty_ramp = 1.5
 
 var enemy_speed = 1
@@ -16,6 +17,8 @@ var enemies = []
 var active = true
 var enemies_spawned = 0
 var biden = false
+var boss_level = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -70,7 +73,10 @@ func _on_WaveTimer_timeout():
 		$WaveTimer.stop()
 		$SpawnTimer.stop()
 		active = false
-	emit_signal("wave_change", floor(self.waves))
+	if boss_level:
+		emit_signal("wave_change", "???")
+	else:
+		emit_signal("wave_change", floor(self.waves))
 	
 func raise_difficulty():
 	enemies_per_wave_start *= 1.2
@@ -81,5 +87,19 @@ func reset():
 	enemies_spawned = 0
 	enemies_per_wave = enemies_per_wave_start
 	self.waves = self.default_waves
-	emit_signal("wave_change", floor(self.waves))
+	if boss_level:
+		emit_signal("wave_change", "???")
+	else:
+		emit_signal("wave_change", floor(self.waves))
 	active = true
+
+func spawn_boss():
+	print("boss")
+	var b = boss_scene.instance()
+	boss_level = true
+	b.connect("boss_dead", self, "boss_dies")
+	get_parent().add_child(b)
+
+func boss_dies():
+	self.boss_level = false
+	waves = 0

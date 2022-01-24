@@ -7,7 +7,7 @@ script = ExtResource( 2 )
 
 [node name="Avatar" type="RigidBody2D" parent="."]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 515
 gravity_scale = 0.0
 contacts_reported = 10
 contact_monitor = true

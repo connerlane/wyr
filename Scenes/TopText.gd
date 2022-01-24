@@ -60,6 +60,15 @@ func _on_HealthBar_health_empty():
 	$CharacterTimer.start()
 	$CharacterTimer.wait_time = 0.3
 
+func win():
+	game_over = true
+	self.text = ""
+	self.to_display = "YOU WIN"
+	$HangTimer.stop()
+	$HangTimer.wait_time = 999999
+	$CharacterTimer.start()
+	$CharacterTimer.wait_time = 0.3
+
 func display_text(text):
 	self.text = ""
 	self.to_display = text
@@ -73,6 +82,8 @@ func _on_Main_player_changed():
 
 
 func _on_EnemySpawner_wave_change(value):
+	if str(value) == "???":
+		return
 	if value == 1:
 		display_text("Last Wave")
 
